@@ -1,11 +1,11 @@
 const router = require('express').Router()
 const UserController = require('../controllers/userController')
-const isAuth = require('../middleware/auth')
+const isAuthorized = require('../middleware/auth')
 
 // user
-router.get('/me', isAuth, UserController.me)
+router.post('/me', isAuthorized, UserController.me)
 router.post('/register', UserController.register)
 router.get('/login', UserController.login)
-router.get('/list', isAuth, UserController.list)
+router.get('/list', UserController.list)
 
 module.exports = router
