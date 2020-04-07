@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+
 const User = require('../models/user')
 const { tokenSign, tokenVerify } = require('../config/jwt')
 
@@ -17,7 +18,7 @@ const UserController = {
             const user = await User.create(req.body)
             user.password = undefined
             console.log(user)
-            const token = tokenSign({'user': {id: user._id, name: user.name}})
+            const token = tokenSign({'user': {'id': user._id, 'name': user.name}})
             return res.send({ user, token })
         } catch (err) {
             return res.status(400).send({ 'error': err})
@@ -42,7 +43,7 @@ const UserController = {
         if (!userAuth) {
             return res.status(400).send({'error': 'Invalid password :('})
         }
-        const token = tokenSign({ 'user': userAuth.id })
+        const token = tokenSign({'user': {'id': userExist._id, 'name': userExist.name}})
         return res.send({ userAuth, token })
     },
     

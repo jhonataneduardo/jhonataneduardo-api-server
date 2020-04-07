@@ -5,7 +5,6 @@ const BookController = {
 
     bookGet: async (req, res) => {
         try {
-            console.log(req.body)
             const book = await Book.findById(req.params.id).exec();
             if (!book) {
                 res.status(400).send({ 'msg': 'Not find book' })
@@ -29,7 +28,6 @@ const BookController = {
         try {
             const [ type, hash ] = req.headers.authorization.split(' ')
             const data = await tokenVerify(hash)
-            console.log(data)
             req.body.user = data.user.id
             const book = await Book.create(req.body)
             return res.send( { book })

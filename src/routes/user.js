@@ -2,8 +2,10 @@ const router = require('express').Router()
 const UserController = require('../controllers/userController')
 const isAuthorized = require('../middleware/auth')
 
-// user
+// authorization required
 router.post('/me', isAuthorized, UserController.me)
+
+// not authorization required
 router.post('/register', UserController.register)
 router.get('/login', UserController.login)
 router.get('/list', UserController.list)
