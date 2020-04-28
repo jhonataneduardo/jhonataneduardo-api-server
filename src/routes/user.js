@@ -3,7 +3,7 @@ const UserController = require('../controllers/userController')
 const isAuthorized = require('../middleware/auth')
 
 // authorization required
-router.post('/me', isAuthorized, UserController.me)
+router.get('/me', isAuthorized, UserController.me)
 
 // not authorization required
 router.post('/register', UserController.register)
